@@ -22,6 +22,7 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Inter', sans-serif;
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
     }
     body{
         background-color: black;
@@ -30,6 +31,17 @@ export const GlobalStyle = createGlobalStyle`
     h1 , h2 , h3{
         font-weight: 700;
         color: var(--color-grey-0)
+    }
+
+    button{
+        border: none;
+        background: transparent;
+        cursor: pointer;
+    }
+    input{
+        border: none;
+        outline: none;
+        background: transparent;
     }
 
     p, span  {
@@ -41,7 +53,7 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: 400;
         color: var(--color-grey-0);
 
-        @media (width < 768px){
+        @media (width < 425px){
             font-size: 10px;
         }
         

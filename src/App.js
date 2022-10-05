@@ -1,11 +1,11 @@
 
-import Nada from './pages/login';
+import LoginPage from './pages/login';
 
 function App() {
   return (
-    <div className="App">
-      <Nada></Nada>
-    </div>
+    <>
+      <LoginPage/>
+    </>
   );
 }
 
