@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const StyledDivContainerForm = styled.div`
-    height: 100vh;
+    /* height: 100vh; */
+
+    margin-top: 15px;
+    margin-bottom: 16px;
 
     display: flex;
     flex-direction: column;
