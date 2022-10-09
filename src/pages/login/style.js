@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledDivContainerForm = styled.div`
@@ -40,5 +41,27 @@ export const StyledDivContainerForm = styled.div`
 
         
     }
+`
+
+export const StyledLink = styled(Link)`
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Inter',sans-serif;
+
+    color: ${props => props.color};
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+    text-decoration: none;
+
+    background-color:${props => props.background};
+
+    height: 48px;
+
+    border-radius:4px;
+
 `
 

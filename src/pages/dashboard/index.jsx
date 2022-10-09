@@ -1,19 +1,25 @@
 import React from 'react'
-import { ContainerDash } from './style'
+import { ContainerDash,ButtonLinkRegister } from './style'
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => {
+
+const logOut = () =>{
+    localStorage.removeItem('@KenzieHubToken')
+    localStorage.removeItem('@KenzieHubId')
+}
+
   return (
     <ContainerDash>
         <div className="container">
             <nav>         
                     <h1>Kenzie Hub</h1>
-                    <button>Sair</button>
+                    <ButtonLinkRegister onClick={logOut} to={'/'}>Sair</ButtonLinkRegister>
             </nav>
         </div>
         <div className='container'>
             <header>
-                <h2>Olá, Samuel Leão</h2>
-                <span>Primeiro módulo (Introdução ao Frontend)</span>
+                <h2>Olá, {user.user}</h2>
+                <span>{user.module}</span>
             </header>
         </div>
         <main>

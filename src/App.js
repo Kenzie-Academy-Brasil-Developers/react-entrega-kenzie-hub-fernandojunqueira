@@ -1,14 +1,23 @@
 
-import Dashboard from './pages/dashboard';
-import LoginPage from './pages/login';
-import RegisterPage from './pages/register';
+import { useState } from 'react';
+import RoutesMain from './Routes';
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+
+  const [user,setUser] = useState(null)
+
   return (
     <>
-      <LoginPage/>
-      {/* <RegisterPage/> */}
-      {/* <Dashboard/> */}
+    <RoutesMain
+    user={user}
+    setUser={setUser}
+    toast={toast}
+    />
+    <ToastContainer/>
     </>
   );
 }

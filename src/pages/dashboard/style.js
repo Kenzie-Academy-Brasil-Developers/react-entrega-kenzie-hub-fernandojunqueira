@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const ContainerDash = styled.div`
@@ -116,4 +117,18 @@ export const ContainerDash = styled.div`
         color: var(--color-grey-1);
 
     }
+
+    
+`
+
+export const ButtonLinkRegister = styled(Link)`
+
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 28px;
+    color: var(--color-grey-0);
+    border-radius: 4px;
+    padding: 6px 16px;
+    background-color: var(--color-grey-3);
+    text-decoration: none;
 `
