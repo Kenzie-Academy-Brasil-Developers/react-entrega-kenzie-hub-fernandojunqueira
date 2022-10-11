@@ -20,7 +20,7 @@ export const StyledButton = styled.button`
 
     background-color: ${props => props.background};
 
-    height: 48px;
+    min-height: 48px;
     
     border-radius:4px;
 

@@ -41,13 +41,15 @@ export const StyledDivContainerForm = styled.div`
 
         
     }
-`
+    `
 
 export const StyledLink = styled(Link)`
+    min-height: 48px;
     
     display: flex;
     justify-content: center;
     align-items: center;
+
 
     font-family: 'Inter',sans-serif;
 
@@ -59,7 +61,6 @@ export const StyledLink = styled(Link)`
 
     background-color:${props => props.background};
 
-    height: 48px;
 
     border-radius:4px;
 

@@ -59,4 +59,17 @@ export const GlobalStyle = createGlobalStyle`
         
     }
 
+    ::-webkit-scrollbar{
+        background-color: var(--color-grey-3);
+        border-radius: 8px;
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+        background-color: var(--color-grey-1);
+        border-radius: 8px;
+        width: 50px;
+
+    }
+
 `

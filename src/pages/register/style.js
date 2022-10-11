@@ -16,8 +16,8 @@ export const Container = styled.div`
         align-items: center;
         justify-content: space-between;
 
-        margin-top: 58px;
-        margin-bottom: 48px;
+        margin-top: 30px;
+        margin-bottom: 25px;
 
         width: 369px;
         max-width: 95%;
@@ -74,7 +74,7 @@ export const Container = styled.div`
     }
 
     select{
-        height:48px;
+        min-height:48px;
 
         color: var(--color-grey-1);
         font-weight: 400;

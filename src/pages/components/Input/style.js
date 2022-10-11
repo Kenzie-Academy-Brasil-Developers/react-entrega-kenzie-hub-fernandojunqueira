@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledInput = styled.input`
 
-    height:48px;
+    min-height:48px;
 
     color: var(--color-grey-0);
     font-weight: 400;
