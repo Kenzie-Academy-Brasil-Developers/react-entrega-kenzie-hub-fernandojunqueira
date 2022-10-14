@@ -77,9 +77,6 @@ export const ContainerDash = styled.div`
 
         margin: 0 auto;
 
-        @media (width < 425px){
-            display: none;
-        }
     }
 
     h1{
@@ -120,7 +117,47 @@ export const ContainerDash = styled.div`
 
     
 `
+export const StyledList = styled.ul`
+    background-color: var(--color-grey-3);
+    border-radius: 4px;
 
+    max-height: 49vh;
+    overflow-y: auto;   
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 23px;
+    margin-top: 15px;
+`
+export const StyledCard = styled.li`
+    display: flex;
+    justify-content: space-between;
+
+    padding: 12px 25px;
+    border-radius: 4px;
+
+    background-color: var(--color-grey-4);
+
+    img{
+        cursor: pointer;
+    }
+    img:hover{
+        transform: scaleY(1.1);
+    }
+
+    div{
+        display: flex;
+        align-items: center;
+        gap: 26px;
+
+        img{
+            width: 13px;
+            height: 12px;
+        }
+    }
+`
 export const ButtonLinkRegister = styled(Link)`
 
     font-weight: 600;
@@ -131,4 +168,29 @@ export const ButtonLinkRegister = styled(Link)`
     padding: 6px 16px;
     background-color: var(--color-grey-3);
     text-decoration: none;
+`
+export const StyledMain = styled.main`
+    .tech{
+        display: flex;
+        justify-content: space-between;
+
+        margin-top: 11px;
+    }
+
+    button{
+        background-color: var(--color-grey-3);
+        color: white;
+
+        font-size: 20px;
+        font-weight: 500;
+
+        width: 32px;
+        height: 32px;
+        padding: 12px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+    }
 `

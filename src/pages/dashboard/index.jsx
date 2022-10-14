@@ -1,15 +1,18 @@
-import React from 'react'
-import { ContainerDash,ButtonLinkRegister } from './style'
+import React, { useContext } from 'react'
+import RegisterModal from '../../components/RegisterModal'
+import { TechContext } from '../../context/TechContext'
+import { UserContext } from '../../context/UserContext'
+import { ContainerDash,ButtonLinkRegister, StyledList, StyledCard, StyledMain } from './style'
+import trash from './trash.png'
 
-const Dashboard = ({ user }) => {
-
-const logOut = () =>{
-    localStorage.removeItem('@KenzieHubToken')
-    localStorage.removeItem('@KenzieHubId')
-}
+const Dashboard = () => {
+    const { user, logOut , techs  } = useContext(UserContext)
+    const { close , setClose , deleteTech } = useContext(TechContext)
+    
 
   return (
-    <ContainerDash>
+    
+        <ContainerDash>
         <div className="container">
             <nav>         
                     <h1>Kenzie Hub</h1>
@@ -18,15 +21,33 @@ const logOut = () =>{
         </div>
         <div className='container'>
             <header>
-                <h2>Olá, {user.user}</h2>
-                <span>{user.module}</span>
+                <h2>Olá, {user?.name}</h2>
+                <span>{user?.course_module
+}</span>
+                
             </header>
         </div>
-        <main>
-            <h2>Que pena! Estamos em desenvolvimento :(</h2>
-            <p>Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
-        </main>
+        <StyledMain>
+            <div className='tech'>
+                <h2>Tecnologias</h2>
+                <button type='button' onClick={() => setClose(true)}>+</button>
+            </div>
+            <StyledList>
+            {techs?.map((tech,index) => 
+                <StyledCard key={index}>
+                    <h2>{tech.title}</h2>
+                    <div>
+                        <p>{tech.status}</p>
+                        <img src={trash} alt="Lixeira" onClick={() => deleteTech(tech.id)} />
+                    </div>
+                </StyledCard>
+            )}
+            </StyledList>
+        </StyledMain>
+        { close ? (<RegisterModal/>) : (<p></p>) }
+        
     </ContainerDash>
+    
   )
 }
 

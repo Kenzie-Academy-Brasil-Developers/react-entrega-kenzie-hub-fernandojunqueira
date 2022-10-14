@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
         --color-grey-2: #343B41;
         --color-grey-1: #868E96;
         --color-grey-0: #F8F9FA;
+        --color-black30: rgba(0,0,0,0.3);
 
         //feedback Pallete
         --color-sucess: #3FE864;
@@ -46,6 +47,10 @@ export const GlobalStyle = createGlobalStyle`
 
     p, span  {
         color: var(--color-grey-1)  
+    }
+
+    ol, ul, li{
+        list-style: none;
     }
 
     label{
