@@ -42,6 +42,7 @@ const LoginPage = () => {
                 >Entrar</StyledButton>
 
                 <span>Ainda não possui uma conta?</span>
+                <p>Feat/interview</p>
                          
                 <StyledLink to={'/register'}  color={"#F8F9FA"} background={"#868E96"}>Cadastre-se</StyledLink>
                 
