@@ -48,4 +48,8 @@ export const StyledInput = styled.input`
     }
         
     }
+
+    :disabled{
+        color: var(--color-grey-1);
+    }
 `

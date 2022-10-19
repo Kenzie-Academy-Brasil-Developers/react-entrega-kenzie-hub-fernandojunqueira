@@ -15,6 +15,7 @@ function UserProvider({children}){
     const [techs, setTechs] = useState(null)
     const [close, setClose] = useState(false)
     const [del, setDel] = useState(null)
+    const [openUpdateModal,setOpenUpdateModal] = useState(null)
     const location = useLocation()
 
     const navigate = useNavigate()
@@ -43,9 +44,7 @@ function UserProvider({children}){
       loadUser()
       
       }
-    , [close,del])
-    // console.log(techs)
-    
+    , [close,del,openUpdateModal])
 
     const loginUser = async (data) => {
         try {
@@ -112,7 +111,7 @@ function UserProvider({children}){
 
 
     return(
-        <UserContext.Provider value={ { user,setUser,loading,setLoading,toast,loginUser,registerUser,loadingPage,logOut, techs, close, setClose, del, setDel } }>
+        <UserContext.Provider value={ { user,setUser,loading,setLoading,toast,loginUser,registerUser,loadingPage,logOut, techs, close, setClose, del, setDel ,openUpdateModal,setOpenUpdateModal } }>
             {children}
         </UserContext.Provider>
     )

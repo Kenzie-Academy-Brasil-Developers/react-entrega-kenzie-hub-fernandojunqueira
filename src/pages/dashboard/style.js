@@ -140,6 +140,9 @@ export const StyledCard = styled.li`
 
     background-color: var(--color-grey-4);
 
+    &:hover{
+        background-color: var(--color-grey-1)
+    }
     img{
         cursor: pointer;
     }

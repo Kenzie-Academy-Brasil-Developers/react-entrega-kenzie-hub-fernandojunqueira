@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import RegisterModal from '../../components/RegisterModal'
+import UpdateModal from '../../components/UpdateModal'
 import { TechContext } from '../../context/TechContext'
 import { UserContext } from '../../context/UserContext'
 import { ContainerDash,ButtonLinkRegister, StyledList, StyledCard, StyledMain } from './style'
-import trash from './trash.png'
+
 
 const Dashboard = () => {
-    const { user, logOut , techs  } = useContext(UserContext)
-    const { close , setClose , deleteTech } = useContext(TechContext)
-    
+    const { user, logOut , techs ,  setOpenUpdateModal , openUpdateModal } = useContext(UserContext)
+    const { close , setClose   } = useContext(TechContext)
 
   return (
     
@@ -34,17 +34,17 @@ const Dashboard = () => {
             </div>
             <StyledList>
             {techs?.map((tech,index) => 
-                <StyledCard key={index}>
+                <StyledCard key={index} onClick={() => setOpenUpdateModal({title: tech.title,id: tech.id})}>
                     <h2>{tech.title}</h2>
                     <div>
                         <p>{tech.status}</p>
-                        <img src={trash} alt="Lixeira" onClick={() => deleteTech(tech.id)} />
                     </div>
                 </StyledCard>
             )}
             </StyledList>
         </StyledMain>
         { close ? (<RegisterModal/>) : (<p></p>) }
+        { openUpdateModal ? (<UpdateModal />) : (<p></p>) }
         
     </ContainerDash>
     

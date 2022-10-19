@@ -3,9 +3,12 @@ import styled from "styled-components";
 export const StyledButton = styled.button`
 
     color: ${props => props.color};
+
     font-weight: 500;
     font-size: 16px;
     line-height: 26px;
+
+    padding: ${props => props.padding};
     
     :focus{
         outline: 1px solid var(--color-grey-0);

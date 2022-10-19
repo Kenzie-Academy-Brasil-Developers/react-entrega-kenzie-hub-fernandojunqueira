@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from "../services/api";
@@ -8,18 +8,11 @@ export const TechContext = createContext({})
 
 function TechProvider({children}){
 
-    const { close, setClose, setDel } = useContext(UserContext)
-
-    
-  
+    const { close, setClose, setDel , openUpdateModal , setOpenUpdateModal } = useContext(UserContext)
 
     const registerNewTech = async (body) => {
         try {
           await api.post('users/techs',body)
-
-        //   const res = await api.get('/profile')
-        //   console.log(res)
-        //   setTechs(res.data.techs)
         
           toast.success("Nova tecnologia cadastrada", {
             theme: "dark"
@@ -34,21 +27,36 @@ function TechProvider({children}){
         }   
     }
 
-    const deleteTech = async (id) => {
+    const updateTech =  async (body) => {
+    
+      try {
+        await api.put(`/users/techs/${openUpdateModal.id}`,body)
+
+        toast.success("Tecnologia atualizada", {
+          theme: "dark"
+        })
+
+        setOpenUpdateModal(null)
+
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    const deleteTech = async () => {
         try {
-            const response = await api.delete(`users/techs/${id}`)
+            const response = await api.delete(`users/techs/${openUpdateModal.id}`)
 
             setDel(response)
-            toast.success("Tecnologia deletada", {
-                theme: "dark"
-              })
+            setOpenUpdateModal(null)
+
         } catch (error) {
             console.error(error)
         }
     }
 
     return(
-        <TechContext.Provider value={{ registerNewTech, setClose , close , deleteTech  }}>
+        <TechContext.Provider value={{ registerNewTech, setClose , close , deleteTech, updateTech  }}>
             {children}
         </TechContext.Provider>
     )
