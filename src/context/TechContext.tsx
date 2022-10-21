@@ -1,16 +1,35 @@
-import { createContext, useContext } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from "../services/api";
 import { UserContext } from "./UserContext";
 
-export const TechContext = createContext({})
+interface iTechContextProps{
+  children: ReactNode;
+}
 
-function TechProvider({children}){
+interface iRegisterNewTech{
+  title: string;
+  status: string;
+}
+
+interface iUpdateTech{
+  status: string;
+}
+
+interface iTechContext{
+  registerNewTech: (body:iRegisterNewTech) => void;
+  updateTech: (body:iUpdateTech) => void;
+  deleteTech: () => void;
+}
+
+export const TechContext = createContext({} as iTechContext)
+
+function TechProvider({children}:iTechContextProps){
 
     const { close, setClose, setDel , openUpdateModal , setOpenUpdateModal } = useContext(UserContext)
 
-    const registerNewTech = async (body) => {
+    const registerNewTech = async (body:iRegisterNewTech) => {
         try {
           await api.post('users/techs',body)
         
@@ -21,16 +40,16 @@ function TechProvider({children}){
           setClose(false)
 
         } catch (error) {
-            toast.error(`${error.response.data.message}`, {
+            toast.error(`Essa tecnologia já foi criada.`, {
                 theme: "dark"
               })
         }   
     }
 
-    const updateTech =  async (body) => {
+    const updateTech =  async (body:iUpdateTech) => {
     
       try {
-        await api.put(`/users/techs/${openUpdateModal.id}`,body)
+        await api.put(`/users/techs/${openUpdateModal?.id}`,body)
 
         toast.success("Tecnologia atualizada", {
           theme: "dark"
@@ -44,10 +63,12 @@ function TechProvider({children}){
     }
 
     const deleteTech = async () => {
-        try {
-            const response = await api.delete(`users/techs/${openUpdateModal.id}`)
+      const token = localStorage.getItem('@KenzieHubToken')
 
-            setDel(response)
+        try {
+            const response = await api.delete(`users/techs/${openUpdateModal?.id}`,{headers:{'Authorization': `Bearer ${token}`}})
+
+            setDel('Deleted')
             setOpenUpdateModal(null)
 
         } catch (error) {
@@ -56,7 +77,7 @@ function TechProvider({children}){
     }
 
     return(
-        <TechContext.Provider value={{ registerNewTech, setClose , close , deleteTech, updateTech  }}>
+        <TechContext.Provider value={{ registerNewTech  , deleteTech, updateTech  }}>
             {children}
         </TechContext.Provider>
     )

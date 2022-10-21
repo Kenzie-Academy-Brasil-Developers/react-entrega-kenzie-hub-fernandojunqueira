@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+interface iStyledLink{
+    color: string;
+    background: string;
+}
+
 export const StyledDivContainerForm = styled.div`
     /* height: 100vh; */
 
@@ -43,7 +48,7 @@ export const StyledDivContainerForm = styled.div`
     }
     `
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)<iStyledLink>`
     min-height: 48px;
     
     display: flex;
@@ -53,13 +58,13 @@ export const StyledLink = styled(Link)`
 
     font-family: 'Inter',sans-serif;
 
-    color: ${props => props.color};
+    color: ${({color}) => color};
     font-weight: 500;
     font-size: 16px;
     line-height: 26px;
     text-decoration: none;
 
-    background-color:${props => props.background};
+    background-color:${({background}) => background};
 
 
     border-radius:4px;

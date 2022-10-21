@@ -5,13 +5,13 @@ import Dashboard from '../pages/dashboard'
 import LoginPage from '../pages/login'
 import RegisterPage from '../pages/register'
 
-const RoutesMain = ({ user,setUser }) => {
+const RoutesMain = () => {
   return (
     <Routes>
-        <Route index element={<LoginPage user={user} setUser={setUser} />}/>
+        <Route index element={<LoginPage />}/>
         <Route path='/register' element={<RegisterPage/>}/>
         <Route element={<ProtectedRoutes/>}>
-           <Route path='/dashboard' element={<Dashboard user={user}/>}/>
+           <Route path='/dashboard' element={<Dashboard />}/>
         </Route>
         <Route path='*' element={<Navigate to={'/'} />}/>
     </Routes>

@@ -11,12 +11,16 @@ import { StyledModal } from '../RegisterModal/styled'
 import { StyledDiv } from './style'
 
 
+interface iUpdateTech{
+    status: string;
+  }
+
 const UpdateModal    = () => {
     
     const { updateTech , deleteTech } = useContext(TechContext)
     const {  setOpenUpdateModal , openUpdateModal } = useContext(UserContext)
 
-    const { register, handleSubmit,formState:{ errors } } = useForm({
+    const { register, handleSubmit,formState:{ errors } } = useForm<iUpdateTech>({
         resolver: yupResolver(schema),  
     });
 
@@ -37,14 +41,14 @@ const UpdateModal    = () => {
                         type="text" 
                         id='email' 
                         placeholder='Digite aqui a tecnologia'
-                        value={openUpdateModal.title}
+                        value={openUpdateModal?.title}
                         disabled         
                         />
                         
                        
 
                         <label htmlFor='module' >Selecionar status</label>
-                        <select name="modules" id="module" {...register("status")}>
+                        <select  id="module" {...register("status")}>
                             <option value="Iniciante" >Iniciante</option>
                             <option value="Intermediário">Intermediário</option>
                             <option value="Avançado">Avançado</option>

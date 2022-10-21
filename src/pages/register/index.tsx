@@ -10,12 +10,20 @@ import { schema } from "../../validations/registerUser.js";
 
 import { UserContext } from '../../context/UserContext'
 
-
+interface iRegister{
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    bio: string;
+    contact: string;
+    course_module: string;
+}
 
 const RegisterPage = () => {
     const { loading, registerUser } = useContext(UserContext)
 
-    const { register, handleSubmit,formState:{ errors } } = useForm({
+    const { register, handleSubmit,formState:{ errors } } = useForm<iRegister>({
         resolver: yupResolver(schema),  
     });
 
@@ -56,7 +64,7 @@ const RegisterPage = () => {
             <p>{errors.contact?.message}</p>
 
             <label htmlFor='module' >Selecionar módulo</label>
-            <select name="modules" id="module" {...register("course_module")}>
+            <select  id="module" {...register("course_module")}>
                 <option value="Primeiro módulo (Introdução ao Frontend)" >Primeiro Módulo</option>
                 <option value="Segundo módulo (Frontend Avançado)">Segundo Módulo</option>
                 <option value="Terceiro módulo (Introdução ao Backend)">Terceiro Módulo</option>

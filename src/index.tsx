@@ -7,7 +7,7 @@ import Provider from './context/Providers';
 import { GlobalStyle } from './styles.css/global';
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <BrowserRouter>

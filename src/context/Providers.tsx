@@ -1,9 +1,13 @@
 import TechProvider from "./TechContext";
 import UserProvider from "./UserContext";
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 
-const Provider = ({children}) => {
+interface iProvider{
+  children: ReactNode;
+}
+
+const Provider = ({children}:iProvider) => {
   return (
     <UserProvider>
         <TechProvider>

@@ -10,11 +10,16 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../validations/loginUser'
 
+interface iLogin{
+  email: string;
+  password:string;
+}
+
 const LoginPage = () => {
 
   const { loading , loginUser } = useContext(UserContext)
 
-  const { register, handleSubmit,formState:{ errors } } = useForm({
+  const { register, handleSubmit,formState:{ errors } } = useForm<iLogin>({
     resolver: yupResolver(schema),  
 });
 

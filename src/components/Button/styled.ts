@@ -1,14 +1,20 @@
 import styled from "styled-components";
 
-export const StyledButton = styled.button`
+interface iStyledButton{
+    padding?: string;
+    color: string;
+    background: string;
+}
 
-    color: ${props => props.color};
+export const StyledButton = styled.button<iStyledButton>`
+
+    color: ${({color}) => color};
 
     font-weight: 500;
     font-size: 16px;
     line-height: 26px;
 
-    padding: ${props => props.padding};
+    padding: ${({padding}) => padding};
     
     :focus{
         outline: 1px solid var(--color-grey-0);
@@ -21,7 +27,7 @@ export const StyledButton = styled.button`
         line-height: 21px;
     }
 
-    background-color: ${props => props.background};
+    background-color: ${({background}) => background};
 
     min-height: 48px;
     

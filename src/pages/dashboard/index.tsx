@@ -5,10 +5,17 @@ import { TechContext } from '../../context/TechContext'
 import { UserContext } from '../../context/UserContext'
 import { ContainerDash,ButtonLinkRegister, StyledList, StyledCard, StyledMain } from './style'
 
+interface iTechs{
+    id: string ; 
+    title: string ; 
+    status: string ; 
+    created_at: string ; 
+    updated_at: string ; 
+  }
 
 const Dashboard = () => {
-    const { user, logOut , techs ,  setOpenUpdateModal , openUpdateModal } = useContext(UserContext)
-    const { close , setClose   } = useContext(TechContext)
+    const { user, logOut , techs ,  setOpenUpdateModal , openUpdateModal ,close , setClose } = useContext(UserContext)
+    // const {    } = useContext(TechContext)
 
   return (
     
@@ -33,7 +40,7 @@ const Dashboard = () => {
                 <button type='button' onClick={() => setClose(true)}>+</button>
             </div>
             <StyledList>
-            {techs?.map((tech,index) => 
+            {techs?.map((tech:iTechs,index:number) => 
                 <StyledCard key={index} onClick={() => setOpenUpdateModal({title: tech.title,id: tech.id})}>
                     <h2>{tech.title}</h2>
                     <div>

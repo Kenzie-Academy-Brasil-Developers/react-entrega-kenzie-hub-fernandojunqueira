@@ -2,17 +2,24 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { TechContext } from '../../context/TechContext'
+import { UserContext } from '../../context/UserContext'
 import { schema } from '../../validations/registerNewTech'
 import { StyledButton } from '../Button/styled'
 import { StyledForm } from '../Form/style'
 import { StyledInput } from '../Inputs/style'
 import { StyledModal } from './styled'
 
+interface iRegisterNewTech{
+    title: string;
+    status: string;
+  }
+
 const RegisterModal = () => {
     
-    const { registerNewTech , setClose } = useContext(TechContext)
+    const { registerNewTech  } = useContext(TechContext)
+    const { setClose } = useContext(UserContext)
 
-    const { register, handleSubmit,formState:{ errors } } = useForm({
+    const { register, handleSubmit,formState:{ errors } } = useForm<iRegisterNewTech>({
         resolver: yupResolver(schema),  
     });
 
@@ -38,7 +45,7 @@ const RegisterModal = () => {
                        
 
                         <label htmlFor='module' >Selecionar status</label>
-                        <select name="modules" id="module" {...register("status")}>
+                        <select  id="module" {...register("status")}>
                             <option value="Iniciante" >Iniciante</option>
                             <option value="Intermediário">Intermediário</option>
                             <option value="Avançado">Avançado</option>
