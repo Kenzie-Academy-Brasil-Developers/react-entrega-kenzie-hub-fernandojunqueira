@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-interface iStyledButton{
+interface iStyledButtonProps{
     padding?: string;
     color: string;
     background: string;
 }
 
-export const StyledButton = styled.button<iStyledButton>`
+export const StyledButton = styled.button<iStyledButtonProps>`
 
     color: ${({color}) => color};
 

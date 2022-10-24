@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { StyledForm } from '../../components/Form/style'
 import { StyledInput } from '../../components/Inputs/style'
-import { StyledButton } from '../../components/Button/styled.js'
+import { StyledButton } from '../../components/Button/styled'
 import { Container, StyledLinkVoltar } from './style'
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from "../../validations/registerUser.js";
+import { schema } from "../../validations/registerUser";
 
 import { UserContext } from '../../context/UserContext'
 

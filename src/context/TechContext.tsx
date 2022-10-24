@@ -63,10 +63,9 @@ function TechProvider({children}:iTechContextProps){
     }
 
     const deleteTech = async () => {
-      const token = localStorage.getItem('@KenzieHubToken')
-
+    
         try {
-            const response = await api.delete(`users/techs/${openUpdateModal?.id}`,{headers:{'Authorization': `Bearer ${token}`}})
+            const response = await api.delete(`users/techs/${openUpdateModal?.id}`)
 
             setDel('Deleted')
             setOpenUpdateModal(null)

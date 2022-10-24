@@ -2,27 +2,12 @@ import { createContext,  ReactNode,  useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Toast } from "react-toastify/dist/types";
-import api from "../services/api";
+import { getProfile, iProfile } from "../services/getProfiles";
+import { iLoginBody, postLogin } from "../services/postLogin";
+import { iRegisterBody, postRegister } from "../services/postRegister";
 
 interface iUserContextProps{
   children: ReactNode;
-}
-
-interface iLoginBody{
-  email: string;
-  password: string;
-}
-
-interface iRegisterBody{
-  
-  email: string ; 
-  password: string ; 
-  name: string ; 
-  bio: string ; 
-  contact: string ; 
-  course_module: string ; 
-  
 }
 
 interface iTechs{
@@ -33,36 +18,17 @@ interface iTechs{
   updated_at: string ; 
   map?: any;
 }
-interface iProfile{
-  
-  id: string; 
-  name: string;
-  email: string;
-  course_module:string;
-  bio: string;
-  contact: string;
-  techs: 
-    {
-    id: string ; 
-    title: string ; 
-    status: string ; 
-    created_at: string ; 
-    updated_at: string ; 
-  }
-,
-  works: [],
-  created_at: string;
-  updated_at: string;
-  avatar_url: null;
-  
-}
-interface iData{
-  user: iProfile;
-  token: string;
-}
 
-interface iLogin{
-  data: iData;
+interface iWorks{
+	id: string ;
+	title: string ;
+	description: string ;
+	deploy_url: string ;
+	user: {
+		id: string ;
+	},
+	created_at: string ;
+	updated_at: string ;
 }
 
 interface iOpenModal{
@@ -70,11 +36,7 @@ interface iOpenModal{
   id: string;
 }
 
-interface iResponse{
-  data: iProfile
-}
-
-interface iValuesProps{
+interface iUserContext{
   user:iProfile | null;
   setUser:React.Dispatch<React.SetStateAction<iProfile | null>>;
   loading:boolean;
@@ -89,6 +51,8 @@ interface iValuesProps{
   setDel:React.Dispatch<React.SetStateAction<string | null>>;
   openUpdateModal:iOpenModal | null;
   setOpenUpdateModal:React.Dispatch<React.SetStateAction<iOpenModal | null>>;
+  works: iWorks[] |  null;
+  setWorks : React.Dispatch<React.SetStateAction<iWorks[] | null>>;
 
   loginUser: (body:iLoginBody) => void;
   registerUser: (body:iRegisterBody) => void;
@@ -96,15 +60,16 @@ interface iValuesProps{
 
 }
 
-export const UserContext = createContext({} as iValuesProps)
+export const UserContext = createContext<iUserContext>({} as iUserContext)
 
 
-function UserProvider({children}:iUserContextProps){
+function UserProvider({children}:iUserContextProps){  
 
     const [user, setUser] = useState<iProfile | null>(null)
     const [loading, setLoading] = useState(false)
     const [loadingPage, setLoadingPage] = useState(true)
     const [techs, setTechs] = useState<iTechs | null>(null)
+    const [works, setWorks] = useState<iWorks[] | null>([])
     const [close, setClose] = useState(false)
     const [del, setDel] = useState<string | null>(null)
     const [openUpdateModal,setOpenUpdateModal] = useState<iOpenModal | null>(null)
@@ -119,16 +84,11 @@ function UserProvider({children}:iUserContextProps){
         if(token) {
           try {
 
+           const data = await getProfile(token)
 
-            // api.defaults.headers.common.authorization = `Bearer ${token}`
-            // api.defaults.headers.common.authorization
-
-            // api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  
-            const response:iResponse = await api.get('/profile',{headers:{'Authorization': `Bearer ${token}`}})
-
-            setUser(response.data)
-            setTechs(response.data.techs)
+            setUser(data)
+            setTechs(data.techs)
+            setWorks(data.works)
             
           } catch (error) {
             console.error(error)
@@ -143,17 +103,14 @@ function UserProvider({children}:iUserContextProps){
       }
     , [close,del,openUpdateModal])
 
-    const loginUser = async (body:iLoginBody) => {
+    const loginUser = async (body:iLoginBody):Promise<void> => {
         try {
       
           setLoading(true)
       
-          const {data}:iLogin = await api.post('sessions',body)
-
-          api.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+          const data = await postLogin(body)
       
           setUser(data.user)
-          
           setTechs(data.user.techs)
       
           localStorage.setItem('@KenzieHubToken',data.token)
@@ -181,7 +138,7 @@ function UserProvider({children}:iUserContextProps){
     const  registerUser = async (body:iRegisterBody) => {
       try {
           setLoading(true)
-           await api.post('users',body)
+          postRegister(body)
 
           toast.success("Conta criada com sucesso!", {
               theme: "dark"
@@ -208,7 +165,7 @@ function UserProvider({children}:iUserContextProps){
 
 
     return(
-        <UserContext.Provider value={ { user,setUser,loading,setLoading,loginUser,registerUser,loadingPage,logOut, techs, close, setClose, del, setDel ,openUpdateModal,setOpenUpdateModal } }>
+        <UserContext.Provider value={ { user,setUser,loading,setLoading,loginUser,registerUser,loadingPage,logOut, techs, close, setClose, del, setDel ,openUpdateModal,setOpenUpdateModal,setWorks,works } }>
             {children}
         </UserContext.Provider>
     )
